@@ -37,10 +37,16 @@ export class FieldCustomizerBase extends React.PureComponent<FieldCustomizerProp
   }
 
   private customizableProps() {
-    return [{
+    const scale = {
       prop: 'scale',
       nestedProp: 'type'
-    }];
+    };
+    const axis = {
+      prop: 'axis',
+      nestedProp: 'orient'
+    };
+
+    return [scale, axis];
   }
 }
 

@@ -27,11 +27,13 @@ export class PropertyEditorBase extends React.PureComponent<PropertyEditorProps,
       "ui:placeholder": "auto",
       "ui:emptyValue": "auto"
     };
-    const formData = fieldDef.scale ? fieldDef.scale.type : 'auto';
+    const formData = this.generateFormData(fieldDef, prop);
+    // const formData = fieldDef.axis ? fieldDef.axis.orient : 'auto';
+    // const formData = fieldDef.scale ? fieldDef.scale.type : 'auto';
     return (
       <div styleName="property-editor">
         <Form
-          schema={(vlSchema as any).definitions.ScaleType} // TODO don't use any
+          schema={this.generateSchema(prop)} // TODO don't use any
           uiSchema={uiSchema}
           formData={formData}
           onChange={this.changeFieldProperty}
@@ -41,6 +43,24 @@ export class PropertyEditorBase extends React.PureComponent<PropertyEditorProps,
         </Form>
       </div>
     );
+  }
+
+  protected generateFormData(fieldDef: ShelfFieldDef, prop: string) {
+    switch (prop) {
+      case "axis":
+        return fieldDef.axis ? fieldDef.axis.orient : 'auto';
+      case "scale":
+        return fieldDef.scale ? fieldDef.scale.type : 'auto';
+    }
+  }
+
+  protected generateSchema(prop: string) {
+    switch (prop) {
+      case "axis":
+        return (vlSchema as any).definitions.AxisOrient;
+      case "scale":
+        return (vlSchema as any).definitions.ScaleType;
+    }
   }
 
   protected changeFieldProperty(result: any) {

@@ -18,6 +18,7 @@ export function filterReducer(
     case FILTER_ADD: {
       const {filter} = action.payload;
       let index = action.payload.index;
+      console.log(action.payload);
       if (!index) {
         index = filters.length;
       }
