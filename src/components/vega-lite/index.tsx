@@ -17,7 +17,7 @@ export interface VegaLiteProps {
 
   data: InlineData;
 
-  viewListener?: (view: vega.View) => any;
+  viewRunAfter?: (view: vega.View) => any;
 }
 
 export interface VegaLiteState {
@@ -168,9 +168,9 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
   private runView() {
     try {
       this.view.run();
-      this.view.runAfter((viewAfterRun: vega.View) => {
-        if (this.props.viewListener) {
-          this.props.viewListener(viewAfterRun);
+      this.view.runAfter((view: vega.View) => {
+        if (this.props.viewRunAfter) {
+          this.props.viewRunAfter(view);
         }
       });
     } catch (err) {
