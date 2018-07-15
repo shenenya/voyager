@@ -5,7 +5,7 @@ import {QueryCreator} from './base';
 
 export const histograms: QueryCreator = {
   type: 'histograms',
-  title: 'Univariate Summaries',
+  title: '单变量统计',
   filterSpecifiedView: undefined,
   createQuery(query: Query): Query {
     return {

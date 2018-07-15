@@ -21,7 +21,7 @@ import {Dataset, State} from '../../models';
 import {selectDataset} from '../../selectors';
 
 export interface DataSelectorOwnProps {
-  title: 'Change' | 'Load';
+  title: '修改' | '打开';
 }
 
 export interface DataSelectorConnectProps {
@@ -70,14 +70,14 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
          className="voyager"
        >
           <div className='modal-header'>
-            <a styleName='modal-close' onClick={this.closeModal}>close</a>
-            <h3>Add Dataset</h3>
+            <a styleName='modal-close' onClick={this.closeModal}>关闭</a>
+            <h3>添加数据</h3>
           </div>
           <Tabs className={styles['react-tabs']}>
             <TabList className={styles['tab-list']}>
-              <Tab className={styles.tab}>Change Dataset</Tab>
-              <Tab className={styles.tab}>Paste or Upload Data</Tab>
-              <Tab className={styles.tab}>From URL</Tab>
+              <Tab className={styles.tab}>修改</Tab>
+              <Tab className={styles.tab}>粘贴上传数据</Tab>
+              <Tab className={styles.tab}>链接</Tab>
             </TabList>
 
             <TabPanel className={styles['tab-panel']}>
@@ -124,10 +124,10 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     return (
       <div styleName='upload-panel'>
         <div className='form-group'>
-          <label htmlFor='data-file'>File</label>
+          <label htmlFor='data-file'>文件</label>
           <input id='data-file' type='file' onChange={this.onFileChange} />
         </div>
-        <p>Upload a data file, or paste data in CSV format into the input.</p>
+        <p>上传数据文件，或粘贴CSV格式数据。</p>
         <div styleName='dropzone-target' />
       </div>
     );
@@ -137,12 +137,10 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     return (
       <div styleName='url-panel'>
         <p>
-          Add the name of the dataset and the URL to a <b> JSON </b>, <b> CSV </b> (with header), or
-          <b> TSV </b> file. Make sure that the formatting is correct and clean the data before adding it.
-          The added dataset is only visible to you.
+          增加<b> JSON </b>、<b> CSV </b>（包含表头）、或<b> TSV </b>类型数据文件名和链接。确保格式正确，清洗完成。所添加数据仅你可见。
         </p>
         <div className='form-group'>
-          <label htmlFor='filetype-selector'>File Type</label>
+          <label htmlFor='filetype-selector'>文件类型</label>
           <select value={this.state.fileType} onChange={this.handleFileTypeChange} id='filetype-selector'>
             <option value="json">JSON</option>
             <option value="csv">CSV</option>
@@ -150,7 +148,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
           </select>
         </div>
         <div className='form-group'>
-          <label htmlFor='data-name'>Name</label>
+          <label htmlFor='data-name'>名称</label>
           <input
             name='dataName'
             value={this.state.dataName}
@@ -160,7 +158,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='data-url'>URL</label>
+          <label htmlFor='data-url'>链接</label>
           <input
             name='dataUrl'
             value={this.state.dataUrl}
@@ -169,7 +167,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
             type='name'
           />
         </div>
-        <button onClick={this.onDataUrlSubmit}>Add Dataset</button>
+        <button onClick={this.onDataUrlSubmit}>添加数据</button>
       </div>
     );
   }
@@ -182,7 +180,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
     return (
       <div styleName='paste-panel'>
         <div className='form-group'>
-          <label htmlFor='data-name'>Name</label>
+          <label htmlFor='data-name'>名称</label>
           <input
             name='dataName'
             value={this.state.dataName}
@@ -198,7 +196,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
             onChange={this.handleTextChange}
           />
         </div>
-        <button onClick={this.onDataTextSubmit}>Add Data</button>
+        <button onClick={this.onDataTextSubmit}>添加数据</button>
       </div>
     );
   }

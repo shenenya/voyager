@@ -119,7 +119,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
                 offset='0px 30px'
               >
                 {this.renderCopySpecButton()}
-                {this.state.copiedPopupIsOpened && <span styleName='copied'>copied</span>}
+                {this.state.copiedPopupIsOpened && <span styleName='copied'>已复制</span>}
               </TetherComponent>
             </span>
           </div>
@@ -252,7 +252,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
     const channelDef = spec.encoding[channel];
     if (isFieldDef(channelDef) && isDiscrete(channelDef)) {
       return <i
-        title='Sort'
+        title='排序'
         className="fa fa-sort-alpha-asc"
         styleName={channel === 'x' ? 'sort-x-command' : 'command'}
         onClick={this.onSort.bind(this, channel)}
@@ -263,7 +263,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
 
   private renderSpecifyButton() {
     return <i
-      title='Specify'
+      title='选择'
       className="fa fa-server"
       styleName="specify-command"
       onClick={this.onSpecify}
@@ -316,7 +316,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
       <CopyToClipboard
         onCopy={this.copied.bind(this)}
         text={JSON.stringify(this.specWithFilter, null, 2)}>
-        <i title='Copy' className='fa fa-clipboard' />
+        <i title='复制' className='fa fa-clipboard' />
       </CopyToClipboard>
     );
   }

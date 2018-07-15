@@ -189,7 +189,7 @@ class EncodingShelfBase extends React.PureComponent<
     const {item, isOver} = this.props;
     return (
       <span styleName={isOver ? 'placeholder-over' : item ? 'placeholder-active' : 'placeholder'}>
-        Drop a field here
+        选择变量
       </span>
     );
   }
@@ -226,7 +226,7 @@ const encodingShelfTarget: DropTargetSpec<EncodingShelfProps> = {
         });
         break;
       default:
-        throw new Error('Field dragged from unregistered source type to EncodingShelf');
+        throw new Error('变量来自未知源');
     }
   }
 };

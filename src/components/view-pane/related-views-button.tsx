@@ -21,7 +21,7 @@ export class RelatedViewsButtonBase extends React.PureComponent<RelatedViewsButt
     return (
       <div styleName="right">
         <a onClick={this.onHideClick}>
-          {this.props.relatedViews.isHidden ? 'Show' : 'Hide'}
+          {this.props.relatedViews.isHidden ? '显示' : '隐藏'}
           &nbsp;&nbsp;
           {!this.props.relatedViews.isHidden ?
             <i className="fa fa-toggle-down" /> :

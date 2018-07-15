@@ -34,7 +34,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
     return (
       <div>
         <button onClick={this.openModal}>
-          <i className="fa fa-bookmark" /> Bookmarks ({this.props.bookmark.count})
+          <i className="fa fa-bookmark" /> 书签 ({this.props.bookmark.count})
         </button>
 
         <Modal
@@ -45,17 +45,17 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
           className="voyager"
         >
           <div className="modal-header">
-            <a className="right" onClick={this.closeModal}>Close</a>
-            <h3>Bookmarks ({this.props.bookmark.count})</h3>
+            <a className="right" onClick={this.closeModal}>关闭</a>
+            <h3>书签（{this.props.bookmark.count}）</h3>
             <a styleName="bookmark-list-util" onClick={this.onClearAll}>
               <i className="fa fa-trash-o"/>
               {' '}
-              Clear all
+              清空
             </a>
             <a styleName="bookmark-list-util" onClick={this.onExport}>
               <i className="fa fa-clipboard"/>
               {' '}
-              Export
+              导出
             </a>
           </div>
 
@@ -126,7 +126,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
         {
           (bookmarkPlotListItems.length > 0) ?
            bookmarkPlotListItems :
-           <div styleName="vis-list-empty">You have no bookmarks</div>
+           <div styleName="vis-list-empty">空</div>
         }
       </div>
     );

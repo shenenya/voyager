@@ -11,7 +11,7 @@ export class FooterBase extends React.PureComponent<{}, {}> {
   public render() {
     return (
       <div styleName='footer'>
-        <a onClick={this.exportLogs}>Download logs</a>
+        <a onClick={this.exportLogs}>下载日志</a>
       </div>
     );
   }

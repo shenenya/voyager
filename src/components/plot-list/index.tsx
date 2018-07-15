@@ -76,7 +76,7 @@ export class PlotListBase extends React.PureComponent<PlotListProps, any> {
         </div>
         {plots && plots.length > limit && (
           <a styleName="load-more" onClick={this.onLoadMore}>
-            Load more...
+            更多……
           </a>
         )}
       </div>

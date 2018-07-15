@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as CSSModules from 'react-css-modules';
 import {connect} from 'react-redux';
 import {InlineData} from 'vega-lite/build/src/data';
-import * as idlLogo from '../../../images/idl-h56.png';
 import * as logo from '../../../images/logo.png';
 import {State} from '../../models/index';
 import {selectData} from '../../selectors/dataset';
@@ -19,11 +18,12 @@ export class HeaderBase extends React.PureComponent<HeaderProps, {}> {
 
     return (
       <div styleName='header'>
-        <img styleName='voyager-logo' src={logo}/>
+        <img styleName='tsvis-logo' src={logo}/>
+        <h1>TsVis数据可视化系统 </h1>
         {data && <Controls/>}
-        <a styleName='idl-logo' onClick={this.openLink}>
+        {/* <a styleName='idl-logo' onClick={this.openLink}>
           <img src={idlLogo}/>
-        </a>
+        </a> */}
       </div>
     );
   }

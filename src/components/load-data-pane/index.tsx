@@ -18,16 +18,16 @@ export class LoadDataBase extends React.PureComponent<DataPanelProps, {}> {
     if (showDataSourceSelector) {
       return (
         <div className="pane" styleName="load-data-pane">
-          Please load a dataset
+          请打开数据
           {' '}
-          <DataSelector title="Load"/>
+          <DataSelector title="打开"/>
         </div>
       );
     } else {
       // TODO: Make this a config parameter of lib-voyager
       return (
         <div className="pane" styleName="load-data-pane">
-          Please load a dataset.  (For the Electron app, please use the menu bar.)
+          请打开数据（Electron应用通过菜单打开。）
         </div>
       );
     }

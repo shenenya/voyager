@@ -16,7 +16,7 @@ export interface Dataset extends DatasetWithoutSchema {
 
 export const DEFAULT_DATASET: Dataset = {
   isLoading: false,
-  name: 'Empty',
+  name: '空',
   schema: new Schema({fields: []}),
   data: null
 };

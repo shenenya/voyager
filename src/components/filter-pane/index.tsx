@@ -191,7 +191,7 @@ class FilterPaneBase extends React.PureComponent<FilterPaneProps, {}> {
       case TimeUnit.YEARMONTHDATE:
         return true;
       default:
-        throw new Error(timeUnit + ' is not supported');
+        throw new Error('不支持' + timeUnit);
     }
   }
 }
@@ -203,11 +203,11 @@ const filterShelfTarget: DropTargetSpec<FilterPaneProps> = {
     }
     const {filter} = monitor.getItem() as DraggedFieldIdentifier;
     if (isWildcard(filter.field)) {
-      window.alert('Cannot add wildcard filter');
-      throw new Error('Cannot add wildcard filter');
+      window.alert('无法添加通配符过滤器');
+      throw new Error('无法添加通配符过滤器');
     }
     if (filterHasField(props.filters, filter.field)) {
-      window.alert('Cannot add more than one filter of the same field');
+      window.alert('同一变量的过滤器不能大于一个');
       return;
     }
     props.handleAction({

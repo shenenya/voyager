@@ -46,15 +46,14 @@ export interface ViewPaneProps extends ActionHandler<Action> {
   filters: ShelfFilter[];
 }
 
-const NO_PLOT_MESSAGE = `No specified visualization yet. ` +
-  `Start exploring by dragging a field to encoding pane ` +
-  `on the left or examining univariate summaries below.`;
+const NO_PLOT_MESSAGE = `未指定可视化。` +
+  `在左侧选择变量或着查看下面的变量统计。`;
 
 const GROUP_BY_LABEL: {[K in ShelfGroupBy]: string} = {
-  auto: 'Automatic',
-  field: 'Field',
-  fieldTransform: 'Field and Transformations',
-  encoding: 'Visual Encodings'
+  auto: '自动',
+  field: '变量',
+  fieldTransform: '变量与变换',
+  encoding: '视觉编码'
 };
 
 class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
@@ -77,7 +76,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
           relatedViews={this.props.relatedViews}
           handleAction={this.props.handleAction}
         />
-        <h2>Related Views</h2>
+        <h2>相关视图</h2>
           {!this.props.relatedViews.isHidden &&
             <RelatedViews />
           }
@@ -90,7 +89,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
         <div styleName="view-pane">
           <div className="pane" styleName={this.props.relatedViews.isHidden ?
             "view-pane-specific-stretch" : "view-pane-specific"}>
-            <h2>Specified View</h2>
+            <h2>指定视图</h2>
             {this.renderSpecifiedView()}
           </div>
           {relatedViews}
@@ -152,7 +151,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
       <div className="pane" styleName="view-pane-gallery">
         <div className="right">
           <label styleName="gallery-command">
-            Showing views with different
+            显示不同视图
             {' '}
             <select value={groupBy} onChange={this.onGroupByChange}>
               {options}
@@ -166,11 +165,11 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
               onChange={this.onAutoAddCountChange}
             />
             {' '}
-            Auto Add Count
+            自动增加计数
           </label>
         </div>
 
-        <h2>Specified Views</h2>
+        <h2>指定视图</h2>
         <PlotList
           result={result}
           resultType="main"

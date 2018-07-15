@@ -16,10 +16,10 @@ class UndoRedoBase extends React.PureComponent<UndoRedoProps, any> {
     return (
       <div>
         <button onClick={onUndo} disabled={!canUndo}>
-          <i className='fa fa-undo' /> Undo
+          <i className='fa fa-undo' /> 恢复
         </button>
         <button onClick={onRedo} disabled={!canRedo}>
-          <i className='fa fa-repeat' /> Redo
+          <i className='fa fa-repeat' /> 重做
         </button>
       </div>
     );

@@ -41,7 +41,7 @@ export class RelatedViewsBase extends React.PureComponent<RelatedViewsProps, {}>
             {
               relatedViewType !== 'histograms' &&
               <i
-                title='Specify'
+                title='指定'
                 styleName='command'
                 className="fa fa-server"
                 onClick={this.onSpecify.bind(this, relatedViewType)}

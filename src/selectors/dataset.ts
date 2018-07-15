@@ -18,9 +18,9 @@ export const selectSchema = (state: State): Schema => state.undoable.present.dat
 
 
 const ALL_PRESET_WILDCARD_FIELDS: ShelfFieldDef[] = [
-  {field: SHORT_WILDCARD, type: 'quantitative', description: 'Quantitative Fields'},
-  {field: SHORT_WILDCARD, type: 'nominal', description: 'Categorical Fields'},
-  {field: SHORT_WILDCARD, type: 'temporal', description: 'Temporal Fields'},
+  {field: SHORT_WILDCARD, type: 'quantitative', description: '定量变量'},
+  {field: SHORT_WILDCARD, type: 'nominal', description: '分类变量'},
+  {field: SHORT_WILDCARD, type: 'temporal', description: '时序变量'},
 ];
 
 export const selectPresetWildcardFields = createSelector(

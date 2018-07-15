@@ -37,37 +37,37 @@ function makeFieldSuggestionQueryCreator(params: {
 
 export const addCategoricalField = makeFieldSuggestionQueryCreator({
   type: 'addCategoricalField',
-  title: 'Add Categorical Field',
+  title: '增加分类变量',
   additionalFieldQuery: {
     channel: SHORT_WILDCARD,
     field: SHORT_WILDCARD,
     type: 'nominal',
-    description: 'Categorical Fields'
+    description: '分类变量'
   }
 });
 
 export const addQuantitativeField = makeFieldSuggestionQueryCreator({
   type: 'addQuantitativeField',
-  title: 'Add Quantitative Field',
+  title: '增加定量变量',
   additionalFieldQuery: {
     channel: SHORT_WILDCARD,
     bin: SHORT_WILDCARD,
     aggregate: SHORT_WILDCARD,
     field: SHORT_WILDCARD,
     type: 'quantitative',
-    description: 'Quantitative Fields'
+    description: '定量变量'
   }
 });
 
 export const addTemporalField = makeFieldSuggestionQueryCreator({
   type: 'addTemporalField',
-  title: 'Add Temporal Field',
+  title: '增加时序变量',
   additionalFieldQuery: {
     channel: SHORT_WILDCARD,
     hasFn: true, // Do not show raw time in the summary
     timeUnit: SHORT_WILDCARD,
     field: SHORT_WILDCARD,
     type: 'temporal',
-    description: 'Temporal Fields'
+    description: '时序变量'
   }
 });

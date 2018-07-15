@@ -5,7 +5,7 @@ import {makeWildcard} from './common';
 
 export const summaries: QueryCreator = {
   type: 'summaries',
-  title: 'Related Summaries',
+  title: '相关统计',
   filterSpecifiedView: true,
   createQuery(query: Query): Query {
     const {spec} = query;

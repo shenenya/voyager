@@ -54,7 +54,7 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
     const nonPositionShelves = ['size', 'color', 'shape', 'detail', 'text'].map(this.encodingShelf, this);
     const wildcardShelvesGroup = !manualSpecificationOnly && (
       <div styleName="shelf-group">
-        <h3>Wildcard Shelves</h3>
+        <h3>通配符架</h3>
         {[...anyEncodings.map((_, i) => i),
           -1 // map the empty placeholder to -1
         ].map(this.wildcardShelf, this)}
@@ -66,11 +66,11 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
         <a className="right" onClick={this.onClear}>
           <i className="fa fa-eraser"/>
           {' '}
-          Clear
+          清空
         </a>
 
         <h2>
-          Encoding
+          编码
           {specPreview && ' Preview'}
         </h2>
 
@@ -82,12 +82,12 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
           <div className="right">
             {this.markPicker()}
           </div>
-          <h3>Mark</h3>
+          <h3>符号</h3>
           {nonPositionShelves}
         </div>
 
         <div styleName="shelf-group">
-          <h3>Facet</h3>
+          <h3>侧面</h3>
           {facetShelves}
         </div>
 
@@ -95,7 +95,7 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
         {wildcardShelvesGroup}
 
         <div styleName="shelf-group">
-          <h3>Filter</h3>
+          <h3>过滤器</h3>
           {this.filterPane()}
         </div>
       </div>

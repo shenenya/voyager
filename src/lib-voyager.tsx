@@ -109,7 +109,7 @@ export class Voyager {
 
     // If it is validated, it is a TopLevelExtendedSpec
     if (!isUnitSpec(spec as TopLevelExtendedSpec)) {
-      throw new Error("Voyager does not support layered or multi-view vega-lite specs");
+      throw new Error("暂不支持分层或多视图vega-lite定义");
     }
 
     // If it is unit, then we can cast to a top level unit spec

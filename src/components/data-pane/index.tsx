@@ -1,12 +1,12 @@
-import * as React from 'react';
-import * as CSSModules from 'react-css-modules';
-import {connect} from 'react-redux';
-import {Dataset, State} from '../../models';
-import {VoyagerConfig} from '../../models/config';
-import {selectConfig, selectDataset} from '../../selectors/';
-import {DataSelector} from '../data-selector';
-import * as styles from './data-pane.scss';
-import {FieldList, PresetWildcardFieldList} from './field-list';
+import * as React from "react";
+import * as CSSModules from "react-css-modules";
+import { connect } from "react-redux";
+import { Dataset, State } from "../../models";
+import { VoyagerConfig } from "../../models/config";
+import { selectConfig, selectDataset } from "../../selectors/";
+import { DataSelector } from "../data-selector";
+import * as styles from "./data-pane.scss";
+import { FieldList, PresetWildcardFieldList } from "./field-list";
 
 export interface DataPanelProps {
   data: Dataset;
@@ -15,33 +15,37 @@ export interface DataPanelProps {
 
 export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
   public render() {
-    const {name} = this.props.data;
+    const { name } = this.props.data;
     const fieldCount = this.props.data.schema.fieldSchemas.length;
-    const {showDataSourceSelector, manualSpecificationOnly} = this.props.config;
+    const {
+      showDataSourceSelector,
+      manualSpecificationOnly
+    } = this.props.config;
 
-    const fields = fieldCount > 0 ? (
-      <div styleName="data-pane-section">
-        <h3>Fields</h3>
-        <FieldList/>
-      </div>) : null;
+    const fields =
+      fieldCount > 0 ? (
+        <div styleName="data-pane-section">
+          <h3>变量</h3>
+          <FieldList />
+        </div>
+      ) : null;
 
-    const wildcardFields = !manualSpecificationOnly && fieldCount > 0 && (
-      <div styleName="data-pane-section">
-        <h3>Wildcard Fields</h3>
-        <PresetWildcardFieldList/>
-      </div>
-    );
+    const wildcardFields = !manualSpecificationOnly &&
+      fieldCount > 0 && (
+        <div styleName="data-pane-section">
+          <h3>分类变量集</h3>
+          <PresetWildcardFieldList />
+        </div>
+      );
     return (
       <div className="pane" styleName="data-pane">
-        <h2 styleName="data-pane-title">Data</h2>
+        <h2 styleName="data-pane-title">数据</h2>
         <div>
           <span styleName="current-dataset">
-            <i className="fa fa-database"/>
-            {' '}
-            {name}
+            <i className="fa fa-database" /> {name}
           </span>
           <span className="right">
-            {showDataSourceSelector ? <DataSelector title="Change"/> : null}
+            {showDataSourceSelector ? <DataSelector title="修改" /> : null}
           </span>
         </div>
         {fields}
@@ -51,11 +55,9 @@ export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
   }
 }
 
-export const DataPane = connect(
-  (state: State) => {
-    return {
-      data: selectDataset(state),
-      config: selectConfig(state)
-    };
-  }
-)(CSSModules(DataPaneBase, styles));
+export const DataPane = connect((state: State) => {
+  return {
+    data: selectDataset(state),
+    config: selectConfig(state)
+  };
+})(CSSModules(DataPaneBase, styles));

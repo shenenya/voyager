@@ -1,19 +1,17 @@
 {
-  "name": "datavoyager",
-  "version": "2.0.0-alpha.15",
+  "name": "tsvis",
+  "version": "1.0-alpha.1",
   "description": "",
   "author": {
-    "name": "UW Interactive Data Lab",
-    "url": "http://idl.cs.washington.edu"
+    "name": "Enaic",
+    "url": "http://tsvis.com"
   },
   "collaborators": [
-    "Kanit Wongsuphasawat <kanitw@gmail.com> (http://kanitw.yellowpigz.com)",
-    "Dominik Moritz <domoritz@cs.washington.edu> (http://domoritz.de)",
-    "Jeffrey Heer <jheer@uw.edu> (http://jheer.org)"
+    ""
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vega/voyager.git"
+    "url": "https://github.com/shenenya/voyager.git"
   },
   "main": "build/lib-voyager.js",
   "license": "BSD-3-Clause",
