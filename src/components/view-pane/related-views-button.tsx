@@ -2,12 +2,11 @@ import * as React from 'react';
 import * as CSSModules from 'react-css-modules';
 import {ActionHandler} from '../../actions/redux-action';
 import {RELATED_VIEWS_HIDE_TOGGLE, RelatedViewsAction} from '../../actions/related-views';
-import {RelatedViews} from '../../models/related-views';
 import * as styles from './related-views-button.scss';
 
 
 export interface RelatedViewsButtonProps extends ActionHandler<RelatedViewsAction> {
-  relatedViews: RelatedViews;
+  collapseRelatedViews: boolean;
 }
 
 export class RelatedViewsButtonBase extends React.PureComponent<RelatedViewsButtonProps, {}> {
@@ -18,25 +17,28 @@ export class RelatedViewsButtonBase extends React.PureComponent<RelatedViewsButt
   }
 
   public render() {
+    const {collapseRelatedViews} = this.props;
     return (
       <div styleName="right">
         <a onClick={this.onHideClick}>
-          {this.props.relatedViews.isHidden ? '显示' : '隐藏'}
+          {collapseRelatedViews ? '显示' : '隐藏'}
           &nbsp;&nbsp;
-          {!this.props.relatedViews.isHidden ?
-            <i className="fa fa-toggle-down" /> :
-            <i className="fa fa-toggle-up" />
-          }
+          {collapseRelatedViews ? <i className='fa fa-toggle-up'/> : <i className='fa fa-toggle-down'/>}
         </a>
       </div>
     );
   }
 
   private onHideClick() {
+    const {collapseRelatedViews} = this.props;
     this.props.handleAction({
-      type: RELATED_VIEWS_HIDE_TOGGLE
+      type: RELATED_VIEWS_HIDE_TOGGLE,
+      payload: {
+        newIsCollapsed: !collapseRelatedViews
+      }
     });
   }
 }
 
 export const RelatedViewsButton = (CSSModules(RelatedViewsButtonBase, styles));
+

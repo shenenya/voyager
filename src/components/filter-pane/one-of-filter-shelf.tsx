@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as CSSModules from 'react-css-modules';
 import {DateTime} from 'vega-lite/build/src/datetime';
-import {OneOfFilter} from 'vega-lite/build/src/filter';
+import {FieldOneOfPredicate} from 'vega-lite/build/src/predicate';
 import {FILTER_MODIFY_ONE_OF, FilterAction} from '../../actions';
 import {insertItemToArray, removeItemFromArray} from '../../reducers/util';
 import * as styles from './one-of-filter-shelf.scss';
@@ -9,7 +9,7 @@ import * as styles from './one-of-filter-shelf.scss';
 
 export interface OneOfFilterShelfProps {
   domain: string[] | number[] | boolean[] | DateTime[];
-  filter: OneOfFilter;
+  filter: FieldOneOfPredicate;
   index: number;
   handleAction: (action: FilterAction) => void;
 }
@@ -41,7 +41,7 @@ export class OneOfFilterShelfBase extends React.PureComponent<OneOfFilterShelfPr
             /> {'' + option}
           </label>
           <span onClick={this.onSelectOne.bind(this, option)} styleName='keep-only'>
-            Keep Only
+            保留
           </span>
         </div>
       );
@@ -51,10 +51,10 @@ export class OneOfFilterShelfBase extends React.PureComponent<OneOfFilterShelfPr
         <div styleName='below-header'>
           <span>
             <a styleName='select-all' onClick={this.onSelectAll.bind(this)}>
-              Select All
+              全选
             </a> /
             <a styleName='clear-all' onClick={this.onClearAll.bind(this)}>
-              Clear All
+              清空
             </a>
           </span>
           {this.state.hideSearchBar ?

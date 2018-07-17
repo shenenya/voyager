@@ -12,10 +12,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {Store} from 'redux';
+import {TopLevelSpec} from 'vega-lite';
 import {Data} from 'vega-lite/build/src/data';
-import {FacetedCompositeUnitSpec, isUnitSpec, TopLevel, TopLevelExtendedSpec} from 'vega-lite/build/src/spec';
-import {isString} from 'vega-lite/build/src/util';
+import {FacetedCompositeUnitSpec, isUnitSpec, TopLevel} from 'vega-lite/build/src/spec';
 import * as vlSchema from 'vega-lite/build/vega-lite-schema.json';
+import {isString} from 'vega-util';
+import { REDO, UNDO } from './actions/index';
 import {App} from './components/app';
 import {State} from './models';
 import {DEFAULT_VOYAGER_CONFIG, VoyagerConfig} from './models/config';
@@ -69,6 +71,25 @@ export class Voyager {
   }
 
   /**
+   * Update state to reflect the previous state
+   *
+   * @memberof Voyager
+   */
+  public undo(): void {
+    this.store.dispatch({type: UNDO});
+    this.render();
+  }
+
+  /**
+   * Update state to reflect the future state
+   *
+   * @memberof Voyager
+   */
+  public redo(): void {
+    this.store.dispatch({type: REDO});
+    this.render();
+  }
+  /**
    * Update the configuration of the voyager application.
    *
    * @param {VoyagerConfig} config
@@ -108,7 +129,7 @@ export class Voyager {
     }
 
     // If it is validated, it is a TopLevelExtendedSpec
-    if (!isUnitSpec(spec as TopLevelExtendedSpec)) {
+    if (!isUnitSpec(spec as TopLevelSpec)) {
       throw new Error("暂不支持分层或多视图vega-lite定义");
     }
 

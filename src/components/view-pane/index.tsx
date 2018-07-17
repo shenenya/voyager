@@ -3,7 +3,7 @@ import * as CSSModules from 'react-css-modules';
 import {connect} from 'react-redux';
 import {InlineData} from 'vega-lite/build/src/data';
 import {SortField, SortOrder} from 'vega-lite/build/src/sort';
-import {FacetedCompositeUnitSpec} from 'vega-lite/build/src/spec';
+import {TopLevelFacetedUnitSpec} from 'vega-lite/build/src/spec';
 import {Action} from '../../actions/index';
 import {ActionHandler, createDispatchHandler} from '../../actions/redux-action';
 import {ShelfAction} from '../../actions/shelf';
@@ -31,7 +31,7 @@ import * as styles from './view-pane.scss';
 
 export interface ViewPaneProps extends ActionHandler<Action> {
   isQuerySpecific: boolean;
-  spec: FacetedCompositeUnitSpec;
+  spec: TopLevelFacetedUnitSpec;
   result: Result;
   bookmark: Bookmark;
   autoAddCount: boolean;
@@ -67,32 +67,31 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
   }
 
   public render() {
-    const { isQuerySpecific } = this.props;
-    const { manualSpecificationOnly } = this.props.config;
-    const relatedViews = !manualSpecificationOnly && (
-      <div className="pane" styleName={!this.props.relatedViews.isHidden ?
-      "view-pane-related-views" : "view-pane-related-views-hide"}>
+    const {isQuerySpecific, handleAction, relatedViews, config} = this.props;
+
+    const collapseRelatedViews = relatedViews.isCollapsed === undefined ? config.relatedViews === 'initiallyCollapsed' :
+      relatedViews.isCollapsed;
+
+    const relatedViewsElement = config.relatedViews !== 'disabled' && (
+      <div className="pane" styleName={collapseRelatedViews ? "view-pane-related-views-collapse" :
+        "view-pane-related-views"}>
         <RelatedViewsButton
-          relatedViews={this.props.relatedViews}
-          handleAction={this.props.handleAction}
+          collapseRelatedViews={collapseRelatedViews}
+          handleAction={handleAction}
         />
         <h2>相关视图</h2>
-          {!this.props.relatedViews.isHidden &&
-            <RelatedViews />
-          }
+        {!collapseRelatedViews && <RelatedViews/>}
       </div>
     );
-
 
     if (isQuerySpecific) {
       return (
         <div styleName="view-pane">
-          <div className="pane" styleName={this.props.relatedViews.isHidden ?
-            "view-pane-specific-stretch" : "view-pane-specific"}>
+          <div className="pane" styleName={collapseRelatedViews ? 'view-pane-specific-stretch' : 'view-pane-specific'}>
             <h2>指定视图</h2>
             {this.renderSpecifiedView()}
           </div>
-          {relatedViews}
+          {relatedViewsElement}
         </div>
       );
     } else {
@@ -100,7 +99,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
     }
   }
 
-  private onSort(channel: 'x' | 'y', value: SortOrder | SortField) {
+  private onSort(channel: 'x' | 'y', value: SortOrder | SortField<string>) {
     const {handleAction} = this.props;
     handleAction({
       type: SPEC_FIELD_PROP_CHANGE,

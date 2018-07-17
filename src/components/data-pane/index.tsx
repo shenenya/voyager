@@ -17,10 +17,7 @@ export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
   public render() {
     const { name } = this.props.data;
     const fieldCount = this.props.data.schema.fieldSchemas.length;
-    const {
-      showDataSourceSelector,
-      manualSpecificationOnly
-    } = this.props.config;
+    const {showDataSourceSelector, wildcards} = this.props.config;
 
     const fields =
       fieldCount > 0 ? (
@@ -30,13 +27,12 @@ export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
         </div>
       ) : null;
 
-    const wildcardFields = !manualSpecificationOnly &&
-      fieldCount > 0 && (
-        <div styleName="data-pane-section">
-          <h3>分类变量集</h3>
-          <PresetWildcardFieldList />
-        </div>
-      );
+    const wildcardFields = wildcards !== 'disabled' && fieldCount > 0 && (
+      <div styleName="data-pane-section">
+        <h3>分类变量集</h3>
+        <PresetWildcardFieldList/>
+      </div>
+    );
     return (
       <div className="pane" styleName="data-pane">
         <h2 styleName="data-pane-title">数据</h2>

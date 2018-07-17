@@ -19,7 +19,7 @@ export class FooterBase extends React.PureComponent<{}, {}> {
   private exportLogs() {
     const logs = constructLogString(actionLogs.getLog().actions);
     const csv = Papa.unparse(logs);
-    const fileName = `Logs_voyager_${new Date()}.csv`;
+    const fileName = `Logs_tsvis_${new Date()}.csv`;
     fileDownload(csv, fileName);
   }
 }

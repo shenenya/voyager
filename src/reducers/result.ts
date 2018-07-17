@@ -1,6 +1,6 @@
+import {isArray} from 'util';
 import {EncodingWithFacet} from 'vega-lite/build/src/encoding';
 import {FieldDef, isFieldDef} from 'vega-lite/build/src/fielddef';
-import {isArray} from 'vega-lite/build/src/util';
 import {
   Action,
   RESULT_RECEIVE,
@@ -61,7 +61,7 @@ function resultReducer(state: Readonly<Result> = DEFAULT_RESULT, action: ResultA
       const {index} = action.payload;
       return {
         ...state,
-        plots: modifyItemInArray(state.plots, index, (p: ResultPlot) => {
+        plots: modifyItemInArray<ResultPlot>(state.plots, index, (p: ResultPlot) => {
           return {
             ...p,
             spec: {
@@ -79,8 +79,6 @@ function resultReducer(state: Readonly<Result> = DEFAULT_RESULT, action: ResultA
 function resultPlotSpecModifyFieldReducer(encoding: EncodingWithFacet<any>, action: ResultModifyAction) {
   const {channel, prop, value} = action.payload;
   const channelDef = encoding[channel];
-
-
   if (!channelDef) {
     console.error(`${action.type} no working for channel ${channel} without field.`);
   } else if (isArray(channelDef)) {
@@ -90,9 +88,7 @@ function resultPlotSpecModifyFieldReducer(encoding: EncodingWithFacet<any>, acti
     console.error(`${action.type}  not supported for detail and order`);
     return encoding;
   }
-
   const fieldDef = encoding[channel] as FieldDef<any>;
-
   switch (action.type) {
     case RESULT_MODIFY_FIELD_PROP:
       return {

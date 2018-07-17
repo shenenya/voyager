@@ -6,7 +6,7 @@ import {makeWildcard} from './common';
 
 export const alternativeEncodings: QueryCreator = {
   type: 'alternativeEncodings',
-  title: 'Alternative Encodings',
+  title: '其他',
   filterSpecifiedView: true,
   createQuery(query: Query): Query {
     const {spec} = query;

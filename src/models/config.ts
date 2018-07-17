@@ -1,15 +1,17 @@
 export interface VoyagerConfig {
   showDataSourceSelector?: boolean;
   serverUrl?: string | null;
-  manualSpecificationOnly?: boolean;
   hideHeader?: boolean;
   hideFooter?: boolean;
+  relatedViews?: 'initiallyCollapsed' | 'initiallyShown' | 'disabled';
+  wildcards?: 'enabled' | 'disabled';
 };
 
 export const DEFAULT_VOYAGER_CONFIG: VoyagerConfig = {
   showDataSourceSelector: true,
   serverUrl: null,
-  manualSpecificationOnly: false,
   hideHeader: false,
-  hideFooter: false
+  hideFooter: true,
+  relatedViews: 'initiallyShown',
+  wildcards: 'disabled'
 };

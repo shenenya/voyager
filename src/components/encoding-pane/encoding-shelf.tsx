@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as CSSModules from 'react-css-modules';
 import {ConnectDropTarget, DropTarget, DropTargetCollector, DropTargetSpec} from 'react-dnd';
 import * as TetherComponent from 'react-tether';
+import {contains} from 'vega-lite/build/src/util';
 import {ActionHandler} from '../../actions/index';
 import {
   SPEC_FIELD_ADD, SPEC_FIELD_MOVE, SPEC_FIELD_REMOVE, SPEC_FUNCTION_ADD_WILDCARD,
@@ -13,11 +14,13 @@ import {
 import {DraggableType, FieldParentType} from '../../constants';
 import {ShelfFieldDef, ShelfId} from '../../models';
 import {ShelfFunction} from '../../models/shelf';
+import {ShelfValueDef} from '../../models/shelf/spec';
 import {isWildcardChannelId} from '../../models/shelf/spec/encoding';
 import {DraggedFieldIdentifier, Field} from '../field/index';
 import * as styles from './encoding-shelf.scss';
 import {FieldCustomizer} from './field-customizer';
 import {FunctionPicker, FunctionPickerWildcardHandler} from './function-picker';
+import {CUSTOMIZABLE_ENCODING_CHANNELS} from './property-editor-schema';
 
 /**
  * Props for react-dnd of EncodingShelf
@@ -35,6 +38,8 @@ export interface EncodingShelfPropsBase extends ActionHandler<SpecEncodingAction
 
   fieldDef: ShelfFieldDef;
 
+  valueDef: ShelfValueDef;
+
   schema: Schema;
 }
 
@@ -46,6 +51,8 @@ export interface EncodingShelfState {
 class EncodingShelfBase extends React.PureComponent<
   EncodingShelfProps, EncodingShelfState
 > implements FunctionPickerWildcardHandler {
+  private fieldCustomizer: HTMLElement;
+  private encodingShelf: HTMLElement;
 
   constructor(props: EncodingShelfProps) {
     super(props);
@@ -57,6 +64,18 @@ class EncodingShelfBase extends React.PureComponent<
     this.onWildcardRemove = this.onWildcardRemove.bind(this);
     this.onWildcardDisable = this.onWildcardDisable.bind(this);
     this.onWildcardEnable = this.onWildcardEnable.bind(this);
+    this.toggleCustomizer = this.toggleCustomizer.bind(this);
+  }
+
+  public componentWillUpdate(nextProps: EncodingShelfProps, nextState: EncodingShelfState) {
+    if (!nextState) {
+      return;
+    }
+    if (nextState.customizerIsOpened) {
+      document.addEventListener('click', this.handleClickOutside.bind(this), true);
+    } else if (this.state.customizerIsOpened) {
+      document.removeEventListener('click', this.handleClickOutside.bind(this), true);
+    }
   }
 
   public render() {
@@ -72,8 +91,8 @@ class EncodingShelfBase extends React.PureComponent<
             attachment="top left"
             targetAttachment="bottom left"
           >
-            {(fieldDef && !isWildcardChannelId(id)) ?
-              <span onClick={this.toggleCustomizer.bind(this)}>
+            {(fieldDef && !isWildcardChannelId(id) && contains(CUSTOMIZABLE_ENCODING_CHANNELS, id.channel)) ?
+              <span onClick={this.toggleCustomizer} ref={this.fieldHandler}>
                 {channelName}{' '} <i className={'fa fa-caret-down'}/>
               </span> :
               <span>
@@ -82,11 +101,13 @@ class EncodingShelfBase extends React.PureComponent<
             }
 
             {this.state.customizerIsOpened &&
+            <div ref={this.popupRefHandler}>
               <FieldCustomizer
                 shelfId={id}
                 fieldDef={fieldDef}
                 handleAction={handleAction}
               />
+            </div>
             }
           </TetherComponent>
         </div>
@@ -152,7 +173,7 @@ class EncodingShelfBase extends React.PureComponent<
 
   protected onRemove() {
     const {id, handleAction} = this.props;
-
+    this.closePopup();
     handleAction({
       type: SPEC_FIELD_REMOVE,
       payload: id
@@ -194,8 +215,30 @@ class EncodingShelfBase extends React.PureComponent<
     );
   }
 
+  private popupRefHandler = (ref: any) => {
+    this.fieldCustomizer = ref;
+  }
+
+  private fieldHandler = (ref: any) => {
+    this.encodingShelf = ref;
+  }
+
+  private handleClickOutside(e: any) {
+    if (this.fieldCustomizer && this.encodingShelf && (this.fieldCustomizer.contains(e.target) ||
+      this.encodingShelf.contains(e.target))) {
+      return;
+    }
+    this.closePopup();
+  }
+
+  private closePopup() {
+    this.setState({
+      customizerIsOpened: false
+    });
+  }
+
   private toggleCustomizer() {
-    this.setState ({
+    this.setState({
       customizerIsOpened: !this.state.customizerIsOpened
     });
   }
