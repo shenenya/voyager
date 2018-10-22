@@ -37,12 +37,12 @@ function makeFieldSuggestionQueryCreator(params: {
 
 export const addCategoricalField = makeFieldSuggestionQueryCreator({
   type: 'addCategoricalField',
-  title: '增加分类变量',
+  title: '增加变量分类',
   additionalFieldQuery: {
     channel: SHORT_WILDCARD,
     field: SHORT_WILDCARD,
     type: 'nominal',
-    description: '分类变量'
+    description: '变量分类'
   }
 });
 

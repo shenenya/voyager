@@ -98,7 +98,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
         <textarea
           styleName='note'
           type='text'
-          placeholder={'notes'}
+          placeholder={'备注'}
           value={this.props.bookmark.dict[specKey].note}
           onChange={this.handleTextChange}
         />

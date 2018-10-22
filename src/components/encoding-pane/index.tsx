@@ -54,7 +54,7 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
     const nonPositionShelves = ['size', 'color', 'shape', 'detail', 'text'].map(this.encodingShelf, this);
     const wildcardShelvesGroup = wildcards !== 'disabled' && (
       <div styleName="shelf-group">
-        <h3>通配符架</h3>
+        <h3>分类可视化</h3>
         {[...anyEncodings.map((_, i) => i),
           -1 // map the empty placeholder to -1
         ].map(this.wildcardShelf, this)}
@@ -95,7 +95,7 @@ class EncodingPanelBase extends React.PureComponent<EncodingPanelProps, {}> {
         {wildcardShelvesGroup}
 
         <div styleName="shelf-group">
-          <h3>过滤器</h3>
+          <h3>过滤</h3>
           {this.filterPane()}
         </div>
       </div>

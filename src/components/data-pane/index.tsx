@@ -29,7 +29,7 @@ export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
 
     const wildcardFields = wildcards !== 'disabled' && fieldCount > 0 && (
       <div styleName="data-pane-section">
-        <h3>分类变量集</h3>
+        <h3>变量分类</h3>
         <PresetWildcardFieldList/>
       </div>
     );
@@ -41,7 +41,7 @@ export class DataPaneBase extends React.PureComponent<DataPanelProps, {}> {
             <i className="fa fa-database" /> {name}
           </span>
           <span className="right">
-            {showDataSourceSelector ? <DataSelector title="修改" /> : null}
+            {showDataSourceSelector ? <DataSelector title="打开" /> : null}
           </span>
         </div>
         {fields}

@@ -27,19 +27,14 @@ import {CUSTOMIZABLE_ENCODING_CHANNELS} from './property-editor-schema';
  */
 export interface EncodingShelfDropTargetProps {
   connectDropTarget: ConnectDropTarget;
-
   isOver: boolean;
-
   item: Object;
 }
 
 export interface EncodingShelfPropsBase extends ActionHandler<SpecEncodingAction> {
   id: ShelfId;
-
   fieldDef: ShelfFieldDef;
-
   valueDef: ShelfValueDef;
-
   schema: Schema;
 }
 

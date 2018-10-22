@@ -138,7 +138,7 @@ class ViewPaneBase extends React.PureComponent<ViewPaneProps, {}> {
 
     const options = SHELF_GROUP_BYS.map(value => {
       const label = value === 'auto' ?
-        `${GROUP_BY_LABEL[defaultGroupBy]} (Automatic)` :
+        `${GROUP_BY_LABEL[defaultGroupBy]} (自动)` :
         GROUP_BY_LABEL[value];
       return (
         <option value={value} key={value}>

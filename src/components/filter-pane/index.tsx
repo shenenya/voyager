@@ -160,10 +160,10 @@ class FilterPaneBase extends React.PureComponent<FilterPaneProps, {}> {
     let styleName, text;
     if (item && !canDrop) {
       styleName = 'placeholder-disabled';
-      text = 'Cannot drop a field here';
+      text = '无法拖入变量';
     } else {
       styleName = isOver ? 'placeholder-over' : item ? 'placeholder-active' : 'placeholder';
-      text = 'Drop a field here';
+      text = '拖入变量';
     }
     return (
       <span styleName={styleName}>

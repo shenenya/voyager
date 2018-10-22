@@ -19,7 +19,7 @@ export class HeaderBase extends React.PureComponent<HeaderProps, {}> {
     return (
       <div styleName='header'>
         <img styleName='tsvis-logo' src={logo}/>
-        <h1>TsVis数据可视化系统 </h1>
+        <h1>TsVis数据可视化系统</h1>
         {data && <Controls/>}
         {/* <a styleName='idl-logo' onClick={this.openLink}>
           <img src={idlLogo}/>

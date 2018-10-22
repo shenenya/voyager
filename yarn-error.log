@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js clean
 
 PATH: 
-  C:\Python35\Lib\site-packages\PyQt5;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Python36\Scripts\;C:\Program Files\Python36\;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\libnvvp;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\doxygen\bin;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\MATLAB\R2017b\runtime\win64;C:\Program Files\MATLAB\R2017b\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Python27;C:\Qt\Qt5.10.0\5.10.0\msvc2015_64\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Python27\Scripts;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\MATLAB\MATLAB Compiler Runtime\v84\runtime\win64;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.0\bin;C:\Users\Dell\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Microsoft VS Code\bin;C:\Users\Dell\AppData\Roaming\npm;C:\Users\Dell\AppData\Local\Yarn\bin
+  C:\Program Files\Docker\Docker\Resources\bin;C:\Python35\Lib\site-packages\PyQt5;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Python36\Scripts\;C:\Program Files\Python36\;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\libnvvp;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\doxygen\bin;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\Program Files\MATLAB\R2017b\runtime\win64;C:\Program Files\MATLAB\R2017b\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Python27;C:\Qt\Qt5.10.0\5.10.0\msvc2015_64\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Python27\Scripts;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\MATLAB\MATLAB Compiler Runtime\v84\runtime\win64;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.0\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Graphviz2.38\bin;C:\Users\Dell\AppData\Roaming\Python36\Scripts;C:\Users\Dell\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Microsoft VS Code\bin;C:\Users\Dell\AppData\Roaming\npm;C:\Users\Dell\AppData\Local\Yarn\bin
 
 Yarn version: 
   1.5.1
@@ -16,7 +16,7 @@ Platform:
 npm manifest: 
   {
     "name": "tsvis",
-    "version": "1.0-alpha.1",
+    "version": "1.0.0-alpha.1",
     "description": "",
     "author": {
       "name": "Enaic",
@@ -91,8 +91,8 @@ npm manifest:
       "vega-datasets": "^1.8.0",
       "vega-expression": "^2.3.1",
       "vega-lite": "2.4.0",
-      "vega-typings": "^0.2.15",
       "vega-tooltip": "^0.4.2",
+      "vega-typings": "^0.2.15",
       "vega-util": "1.7.0"
     },
     "devDependencies": {
@@ -114,6 +114,7 @@ npm manifest:
       "@types/react-hot-loader": "^3.0.3",
       "@types/react-redux": "^4.4.36",
       "@types/react-split-pane": "^0.1.6",
+      "@types/react-table": "6.7.2",
       "@types/react-tabs": "^1.0.0",
       "@types/redux-logger": "^3.0.0",
       "@types/throttle-debounce": "^1.0.0",
@@ -271,6 +272,12 @@ Lockfile:
   "@types/react-split-pane@^0.1.6":
     version "0.1.6"
     resolved "https://registry.yarnpkg.com/@types/react-split-pane/-/react-split-pane-0.1.6.tgz#258c8a7bbce3c0110a236da6a4aeb482cbc5e635"
+    dependencies:
+      "@types/react" "*"
+  
+  "@types/react-table@6.7.2":
+    version "6.7.2"
+    resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-6.7.2.tgz#7f2d6ed219e80f452bcb162bb27d3e289268f8b1"
     dependencies:
       "@types/react" "*"
   
@@ -8704,9 +8711,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 3221225786
+  Exit code: 255
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c webpack-dev-server --open --config config/webpack.config.dev.js
+  Arguments: /d /s /c find -E dist  -regex '.*\.(js|js.map|d.ts)' -delete
   Directory: D:\Codes\Voyager\voyager
   Output:
   

@@ -1,0 +1,16 @@
+.dataset-pane {
+  background-color: #38425D;
+  height: 100%;
+
+  .current-dataset {
+    color: white;
+  }
+
+  .dataset-pane-section {
+    margin-top: 16px;
+  }
+
+  h2.dataset-pane-title, .dataset-pane-section h3 {
+    color: white;
+  }
+}

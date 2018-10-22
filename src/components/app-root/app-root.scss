@@ -1,0 +1,55 @@
+.tab-list {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.tab-panel {
+  display: none;
+  padding: 0px;
+  height: 100%;
+}
+
+.tab {
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 5px 5px 0 0;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.react-tabs {
+  z-index: 10;
+  height: 100%;
+  background-color: white;
+
+  :global &__tab--selected {
+    background: #fff;
+    border-color: #aaa;
+    color: black;
+  }
+
+  &:focus {
+    box-shadow: 0 0 5px hsl(208, 99%, 50%);
+    border-color: hsl(208, 99%, 50%);
+    outline: none;
+
+    &:after {
+      content: "";
+      position: absolute;
+      height: 5px;
+      left: -4px;
+      right: -4px;
+      bottom: -5px;
+      background: #fff;
+    }
+  }
+  :global &__tab-panel--selected {
+    display: block;
+  }
+}

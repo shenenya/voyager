@@ -71,12 +71,12 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
        >
           <div className='modal-header'>
             <a styleName='modal-close' onClick={this.closeModal}>关闭</a>
-            <h3>添加数据</h3>
+            <h3>数据</h3>
           </div>
           <Tabs className={styles['react-tabs']}>
             <TabList className={styles['tab-list']}>
-              <Tab className={styles.tab}>修改</Tab>
-              <Tab className={styles.tab}>粘贴上传数据</Tab>
+              <Tab className={styles.tab}>示例</Tab>
+              <Tab className={styles.tab}>上传</Tab>
               <Tab className={styles.tab}>链接</Tab>
             </TabList>
 
@@ -167,7 +167,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
             type='name'
           />
         </div>
-        <button onClick={this.onDataUrlSubmit}>添加数据</button>
+        <button onClick={this.onDataUrlSubmit}>打开</button>
       </div>
     );
   }
@@ -196,7 +196,7 @@ export class DataSelectorBase extends React.PureComponent<DataSelectorProps, Dat
             onChange={this.handleTextChange}
           />
         </div>
-        <button onClick={this.onDataTextSubmit}>添加数据</button>
+        <button onClick={this.onDataTextSubmit}>打开</button>
       </div>
     );
   }

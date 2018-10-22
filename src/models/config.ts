@@ -13,5 +13,5 @@ export const DEFAULT_VOYAGER_CONFIG: VoyagerConfig = {
   hideHeader: false,
   hideFooter: true,
   relatedViews: 'initiallyShown',
-  wildcards: 'disabled'
+  wildcards: 'enabled'
 };

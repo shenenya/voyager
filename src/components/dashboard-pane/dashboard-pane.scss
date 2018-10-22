@@ -1,0 +1,16 @@
+.dashboard-pane {
+  background-color: #38425D;
+  height: 100%;
+
+  .current-dashboard {
+    color: white;
+  }
+
+  .dashboard-pane-section {
+    margin-top: 16px;
+  }
+
+  h2.dashboard-pane-title, .dashboard-pane-section h3 {
+    color: white;
+  }
+}
