@@ -1,0 +1,34 @@
+{
+    "name": "@types/react-table",
+    "version": "6.7.13",
+    "description": "TypeScript definitions for react-table",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Roy Xue",
+            "url": "https://github.com/royxue",
+            "githubUsername": "royxue"
+        },
+        {
+            "name": "Pavel Sakalo",
+            "url": "https://github.com/psakalo",
+            "githubUsername": "psakalo"
+        },
+        {
+            "name": "Krzysztof Porębski",
+            "url": "https://github.com/Havret",
+            "githubUsername": "Havret"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/react": "*"
+    },
+    "typesPublisherContentHash": "c48af262309380063b98b970c871aafc98df523da7b2160974f5cdc57677fca4",
+    "typeScriptVersion": "2.8"
+}

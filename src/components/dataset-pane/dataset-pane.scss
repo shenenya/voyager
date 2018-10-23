@@ -1,6 +1,7 @@
 .dataset-pane {
-  background-color: #38425D;
-  height: 100%;
+  overflow: scroll;
+  background-color: rgb(255, 255, 255);
+  height: calc(100% - 20px);
 
   .current-dataset {
     color: white;
