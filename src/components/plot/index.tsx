@@ -31,6 +31,7 @@ export interface PlotProps extends ActionHandler<
   isPlotListItem?: boolean;
   showBookmarkButton?: boolean;
   showSpecifyButton?: boolean;
+  showCopyButton?: boolean;
 
   onSort?: (channel: 'x' | 'y', sort: SortField<string> | SortOrder) => void;
 
@@ -40,6 +41,8 @@ export interface PlotProps extends ActionHandler<
   // specified when it's in the modal
   // so we can close the modal when the specify button is clicked.
   closeModal?: () => void;
+
+  width?: number;
 }
 
 
@@ -89,10 +92,14 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
   }
 
   public render() {
-    const {isPlotListItem, onSort, showBookmarkButton, showSpecifyButton, spec, data} = this.props;
+    const {isPlotListItem, onSort, showBookmarkButton, showSpecifyButton, showCopyButton, spec, data, width} = this.props;
 
     let notesDiv;
+    spec['width'] = width;
+    spec['height'] = width;
+    console.log('spec', spec);
     const specKey = JSON.stringify(spec);
+    console.log('specKey', specKey);
     if (this.props.bookmark.dict[specKey]) {
       notesDiv = (
         <textarea
@@ -113,7 +120,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
             {onSort && this.renderSortButton('y')}
             {showBookmarkButton && this.renderBookmarkButton()}
             {showSpecifyButton && this.renderSpecifyButton()}
-            <span styleName='command'>
+            {!showCopyButton ? null : <span styleName='command'>
               <TetherComponent
                 attachment='bottom left'
                 offset='0px 30px'
@@ -121,7 +128,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
                 {this.renderCopySpecButton()}
                 {this.state.copiedPopupIsOpened && <span styleName='copied'>已复制</span>}
               </TetherComponent>
-            </span>
+            </span>}
           </div>
           <span
             onMouseEnter={this.onPreviewMouseEnter}

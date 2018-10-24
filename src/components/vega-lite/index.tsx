@@ -77,6 +77,8 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
   }
 
   public componentDidUpdate(prevProps: VegaLiteProps, prevState: VegaLiteState) {
+    this.size = this.getChartSize();
+    console.log('componentDidUpdate', this.size);
     if (this.updateTimeout) {
       clearTimeout(this.updateTimeout);
     }

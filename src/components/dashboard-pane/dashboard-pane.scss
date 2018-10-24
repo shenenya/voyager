@@ -14,3 +14,39 @@
     color: white;
   }
 }
+
+.bookmark-list {
+  overflow: scroll;
+  // position: absolute;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  // background-color: #E2E9F3;
+  // height: calc(100% - 20px);
+
+  display: flex;
+  align-items: stretch;
+  align-content: flex-start;
+  flex-wrap: wrap;
+
+  .current-dataset {
+    color: white;
+  }
+
+  .dataset-pane-section {
+    margin-top: 16px;
+  }
+
+  h2.dataset-pane-title, .dataset-pane-section h3 {
+    color: white;
+  }
+
+  .bookmark-list-empty, {
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.2em;
+  }
+}

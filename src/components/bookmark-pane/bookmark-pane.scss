@@ -1,0 +1,16 @@
+.bookmark-pane {
+  background-color: #E2E9F3;
+  height: 100%;
+
+  .current-dataset {
+    color: white;
+  }
+
+  .bookmark-pane-section {
+    margin-top: 16px;
+  }
+
+  h2.bookmark-pane-title, .bookmark-pane-section h3 {
+    color: white;
+  }
+}

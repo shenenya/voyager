@@ -51,17 +51,18 @@ export class PlotListBase extends React.PureComponent<PlotListProps, any> {
       const {spec, fieldInfos} = plot;
       return (
         <Plot
+          bookmark={bookmark}
           data={data}
+          filters={filters}
           key={index}
           fieldInfos={fieldInfos}
-          filters={filters}
           handleAction={handleAction}
           isPlotListItem={true}
           onSort={this.onPlotSort.bind(this, index)}
           showBookmarkButton={true}
           showSpecifyButton={true}
+          showCopyButton={true}
           spec={spec}
-          bookmark={bookmark}
         />
       );
     });

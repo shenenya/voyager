@@ -13,6 +13,7 @@ import {State} from '../../models/index';
 import {selectConfig} from '../../selectors';
 import {selectDataset} from '../../selectors/dataset';
 import '../app.scss';
+import {BookmarkPane} from '../bookmark-pane/index';
 import {DashboardPane} from '../dashboard-pane/index';
 import {DataPane} from '../data-pane/index';
 import {DatasetPane} from '../dataset-pane/index';
@@ -30,6 +31,10 @@ export interface AppRootProps {
 }
 
 class AppRootBase extends React.PureComponent<AppRootProps, {}> {
+  private onChange(size: any){
+    console.log('size', size);
+  }
+
   public render() {
     const {dataset, config} = this.props;
     const {hideHeader, hideFooter} = config;
@@ -58,7 +63,11 @@ class AppRootBase extends React.PureComponent<AppRootProps, {}> {
                 </SplitPane>
               </TabPanel>
               <TabPanel className={styles['tab-panel']}>
-                <DashboardPane/>
+                <SplitPane split="vertical" defaultSize={235} minSize={20} maxSize={350}
+                  onChange={this.onChange}>
+                  <BookmarkPane/>
+                  <DashboardPane/>
+                </SplitPane>
               </TabPanel>
             </Tabs>
           </SplitPane>

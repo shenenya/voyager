@@ -116,6 +116,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
           isPlotListItem={true}
           showBookmarkButton={true}
           showSpecifyButton={true}
+          showCopyButton={true}
           spec={spec}
         />
       );
