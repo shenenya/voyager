@@ -35,7 +35,7 @@ export class DatasetPaneBase extends React.PureComponent<DatasetPanelProps, {}> 
                 pageText='页'
                 ofText='/'
                 rowsText='行'
-                data={data.values}
+                data={data.values as any}
                 columns={columns}
                 defaultPageSize = {25}
                 pageSizeOptions = {[25, 50, 100]}
