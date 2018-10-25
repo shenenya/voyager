@@ -97,9 +97,9 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
     let notesDiv;
     spec['width'] = width;
     spec['height'] = width;
-    console.log('spec', spec);
+    // console.log('spec', spec);
     const specKey = JSON.stringify(spec);
-    console.log('specKey', specKey);
+    // console.log('specKey', specKey);
     if (this.props.bookmark.dict[specKey]) {
       notesDiv = (
         <textarea

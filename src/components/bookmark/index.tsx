@@ -34,7 +34,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
     return (
       <div>
         <button onClick={this.openModal}>
-          <i className="fa fa-bookmark" /> 书签 ({this.props.bookmark.count})
+          <i className="fa fa-bookmark" /> 收藏夹 ({this.props.bookmark.count})
         </button>
 
         <Modal
@@ -46,7 +46,7 @@ export class BookmarkBase extends React.PureComponent<BookmarkProps, any> {
         >
           <div className="modal-header">
             <a className="right" onClick={this.closeModal}>关闭</a>
-            <h3>书签（{this.props.bookmark.count}）</h3>
+            <h3>收藏（{this.props.bookmark.count}）</h3>
             <a styleName="bookmark-list-util" onClick={this.onClearAll}>
               <i className="fa fa-trash-o"/>
               {' '}

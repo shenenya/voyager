@@ -1,3 +1,5 @@
+const globalAny: any = global;
+
 import * as React from "react";
 import * as CSSModules from "react-css-modules";
 import { connect } from "react-redux";
@@ -14,13 +16,48 @@ import * as styles from "./dashboard-pane.scss";
 
 // import * as _ from "lodash";
 import * as GridLayout from "react-grid-layout";
+const originalLayouts = getFromLS("layouts") || {};
+const ResponsiveReactGridLayout = GridLayout.WidthProvider(GridLayout.Responsive);
 
 export interface DashboardPanelProps extends ActionHandler<BookmarkAction>  {
   bookmark: Bookmark;
   data: InlineData;
 }
 
-export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, {}> {
+export interface DashboardPanelState {
+  layouts: GridLayout.Layout;
+}
+
+export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, DashboardPanelState> {
+  constructor(props: DashboardPanelProps) {
+    super(props);
+    // console.log('---constructor---');
+    this.state = {
+      layouts: JSON.parse(JSON.stringify(originalLayouts)),
+    };
+  }
+
+  // static get defaultProps() {
+  //   return {
+  //     className: "layout",
+  //     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  //     rowHeight: 30,
+  //   };
+  // }
+
+  public componentWillMount() {
+    console.log('---componentWillMount---', getFromLS("layouts"));
+    this.setState ({
+      layouts: JSON.parse(JSON.stringify(getFromLS("layouts")))
+    });
+  }
+
+  public onLayoutChange(layout: GridLayout.Layout, layouts: GridLayout.Layout) {
+    // console.log('---onLayoutChange---', layout, layouts);
+    saveToLS("layouts", layouts);
+    this.setState({ layouts });
+  }
+
   public render() {
     const {bookmark, data} = this.props;
     const plots: ResultPlot[] = bookmark.list.map(key => bookmark.dict[key].plot);
@@ -37,7 +74,6 @@ export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, 
       // , static: true, minW: 2, maxW: 4
     });
 
-    // console.log('layout', layout);
     const bookmarkPlotListItems = plots.map((plot, index) => {
       const {spec, fieldInfos} = plot;
       return (
@@ -60,21 +96,48 @@ export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, 
     });
 
     return(
-      <GridLayout
+      <ResponsiveReactGridLayout
         className="layout"
-        cols={12}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={30}
         autoSize={true}
         verticalCompact={true}
         width={1450}
         draggableCancel="input,textarea"
+        layouts={this.state.layouts}
+        onLayoutChange={(layout: GridLayout.Layout, layouts: GridLayout.Layout) => this.onLayoutChange(layout, layouts)}
       >
         {
           (bookmarkPlotListItems.length > 0) ?
           bookmarkPlotListItems :
           <div styleName="bookmark-list-empty">空</div>
         }
-      </GridLayout>
+      </ResponsiveReactGridLayout>
+    );
+  }
+}
+
+function getFromLS(key: any) {
+  let ls = {};
+  if (globalAny.localStorage) {
+    try {
+      ls = JSON.parse(globalAny.localStorage.getItem("rgl-8")) || {};
+    } catch (e) {
+      /*Ignore*/
+    }
+  }
+  // console.log('getFromLS, key, value', key, ls[key]);
+  return ls[key];
+}
+
+function saveToLS(key: any, value: any) {
+  // console.log('saveToLS, key, value', key, value);
+  if (globalAny.localStorage) {
+    globalAny.localStorage.setItem(
+      "rgl-8",
+      JSON.stringify({
+        [key]: value
+      })
     );
   }
 }
