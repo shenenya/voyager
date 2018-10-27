@@ -15,17 +15,21 @@ import {selectBookmark} from '../../selectors/index';
 import {Plot} from '../plot';
 
 
-export interface BookmarkListListProps extends ActionHandler<BookmarkAction> {
-  bookmark: Bookmark;
-  data: InlineData;
-  width?: number;
+export interface BookmarkListOwnProps {
+  width: number;
 }
 
-class BookmarkListBase extends React.PureComponent<BookmarkListListProps, {}> {
+export interface BookmarkListConnectProps {
+  bookmark: Bookmark;
+  data: InlineData;
+}
 
-  constructor(props: BookmarkListListProps) {
+export type BookmarkListProps = BookmarkListOwnProps & BookmarkListConnectProps & ActionHandler<BookmarkAction>;
+
+class BookmarkListBase extends React.PureComponent<BookmarkListProps, {}> {
+
+  constructor(props: BookmarkListProps) {
     super(props);
-
     // Bind - https://facebook.github.io/react/docs/handling-events.html
     // this.onAdd = this.onAdd.bind(this);
   }
@@ -33,6 +37,7 @@ class BookmarkListBase extends React.PureComponent<BookmarkListListProps, {}> {
   public render() {
     const {bookmark, data, width} = this.props;
     const plots: ResultPlot[] = bookmark.list.map(key => bookmark.dict[key].plot);
+    const size = {width: width};
 
     const bookmarkPlotListItems = plots.map((plot, index) => {
       const {spec, fieldInfos} = plot;
@@ -40,7 +45,7 @@ class BookmarkListBase extends React.PureComponent<BookmarkListListProps, {}> {
         <Plot
           bookmark={this.props.bookmark}
           data={data}
-          width={width}
+          size={size}
           filters={[]} /* Bookmark specs already have filters included */
           key={index}
           fieldInfos={fieldInfos}
@@ -106,7 +111,8 @@ class BookmarkListBase extends React.PureComponent<BookmarkListListProps, {}> {
 
 const BookmarkListRenderer = CSSModules(BookmarkListBase, styles);
 
-export const BookmarkList = connect(
+export const BookmarkList = connect<BookmarkListConnectProps, ActionHandler<BookmarkAction>,
+  BookmarkListOwnProps>(
   (state: State) => {
     return {
       bookmark: selectBookmark(state),

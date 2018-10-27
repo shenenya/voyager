@@ -30,9 +30,18 @@ export interface AppRootProps {
   config: VoyagerConfig;
 }
 
-class AppRootBase extends React.PureComponent<AppRootProps, {}> {
-  private onChange(size: any){
-    console.log('size', size);
+export interface AppRootState {
+  width: number;
+}
+
+class AppRootBase extends React.PureComponent<AppRootProps, AppRootState> {
+  constructor(props: AppRootProps) {
+    super(props);
+    this.state = {
+      width: 100,
+    };
+
+    this.onChange = this.onChange.bind(this);
   }
 
   public render() {
@@ -63,9 +72,8 @@ class AppRootBase extends React.PureComponent<AppRootProps, {}> {
                 </SplitPane>
               </TabPanel>
               <TabPanel className={styles['tab-panel']}>
-                <SplitPane split="vertical" defaultSize={235} minSize={20} maxSize={350}
-                  onChange={this.onChange}>
-                  <BookmarkPane/>
+                <SplitPane split="vertical" defaultSize={235} minSize={20} maxSize={350} onChange={this.onChange}>
+                  <BookmarkPane width={this.state.width - 100}/>
                   <DashboardPane/>
                 </SplitPane>
               </TabPanel>
@@ -86,6 +94,11 @@ class AppRootBase extends React.PureComponent<AppRootProps, {}> {
         {footer}
       </div>
     );
+  }
+
+  private onChange(width: any){
+    console.log('width', width);
+    this.setState({ width : width });
   }
 }
 

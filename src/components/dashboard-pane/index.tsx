@@ -58,6 +58,10 @@ export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, 
     this.setState({ layouts });
   }
 
+  public onResize() {
+    this.forceUpdate();
+  }
+
   public render() {
     const {bookmark, data} = this.props;
     const plots: ResultPlot[] = bookmark.list.map(key => bookmark.dict[key].plot);
@@ -106,6 +110,7 @@ export class DashboardPaneBase extends React.PureComponent<DashboardPanelProps, 
         draggableCancel="input,textarea"
         layouts={this.state.layouts}
         onLayoutChange={(layout: GridLayout.Layout, layouts: GridLayout.Layout) => this.onLayoutChange(layout, layouts)}
+        onResize={this.onResize.bind(this)}
       >
         {
           (bookmarkPlotListItems.length > 0) ?

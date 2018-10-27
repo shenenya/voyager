@@ -42,7 +42,7 @@ export interface PlotProps extends ActionHandler<
   // so we can close the modal when the specify button is clicked.
   closeModal?: () => void;
 
-  width?: number;
+  size?: {"width"?: any, "height"?: any};
 }
 
 
@@ -64,7 +64,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
     this.state = {
       hovered: false,
       preview: false,
-      copiedPopupIsOpened: false
+      copiedPopupIsOpened: false,
     };
 
     // Bind - https://facebook.github.io/react/docs/handling-events.html
@@ -92,14 +92,16 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
   }
 
   public render() {
-    const {isPlotListItem, onSort, showBookmarkButton, showSpecifyButton, showCopyButton, spec, data, width} = this.props;
+    const {isPlotListItem, onSort, showBookmarkButton, showSpecifyButton, showCopyButton, spec, data, size} = this.props;
+
+    console.log('+++++++++++++++++++++++size', size);
 
     let notesDiv;
-    spec['width'] = width;
-    spec['height'] = width;
-    // console.log('spec', spec);
+    // spec['width'] = size ? size.width : undefined;
+    // spec['height'] = size ? size.height : undefined;
+    console.log('spec', spec);
     const specKey = JSON.stringify(spec);
-    // console.log('specKey', specKey);
+    console.log('specKey', specKey);
     if (this.props.bookmark.dict[specKey]) {
       notesDiv = (
         <textarea
@@ -144,7 +146,7 @@ export class PlotBase extends React.PureComponent<PlotProps, PlotState> {
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
         >
-          <VegaLite spec={spec} logger={this.plotLogger} data={data}/>
+          <VegaLite spec={spec} logger={this.plotLogger} data={data} size={size}/>
         </div>
         {notesDiv}
       </div>

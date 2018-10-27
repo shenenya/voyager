@@ -10,14 +10,11 @@ import {Logger} from '../util/util.logger';
 
 export interface VegaLiteProps {
   spec: TopLevelSpec;
-
   renderer?: 'svg' | 'canvas';
-
   logger: Logger;
-
   data: InlineData;
-
   viewRunAfter?: (view: vega.View) => any;
+  size?: {width?: any, height?: any};
 }
 
 export interface VegaLiteState {
@@ -68,7 +65,7 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
   }
 
   public componentWillReceiveProps(nextProps: VegaLiteProps) {
-    if (nextProps.spec !== this.props.spec) {
+    if (nextProps.size !== this.props.size) {
       this.setState({
         isLoading: true
       });
@@ -77,14 +74,12 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
   }
 
   public componentDidUpdate(prevProps: VegaLiteProps, prevState: VegaLiteState) {
-    this.size = this.getChartSize();
-    // console.log('componentDidUpdate', this.size);
     if (this.updateTimeout) {
       clearTimeout(this.updateTimeout);
     }
     this.updateTimeout = window.setTimeout(
-      (spec: TopLevelSpec, data: InlineData) => {
-        if (prevProps.spec !== spec) {
+      (spec: TopLevelSpec, size: any, data: InlineData) => {
+        if ((prevProps.spec !== spec) || (prevProps.size !== size)) {
           const chart = this.refs[CHART_REF] as HTMLElement;
           chart.style.width = this.size.width + 'px';
           chart.style.height = this.size.height + 'px';
@@ -97,7 +92,7 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
           isLoading: false
         });
       },
-      0, this.props.spec, this.props.data
+      0, this.props.spec, this.props.size, this.props.data
     );
   }
 
@@ -139,7 +134,10 @@ export class VegaLite extends React.PureComponent<VegaLiteProps, VegaLiteState> 
     //   }
     // };
     const {logger} = this.props;
-    const vlSpec = this.props.spec;
+    // const autosize = {autosize: {
+    //   contains: "padding"
+    // }};
+    const vlSpec = {...this.props.spec, ...this.props.size};
     try {
       const spec = vl.compile(vlSpec, logger).spec;
       const runtime = vega.parse(spec, vlSpec.config);
